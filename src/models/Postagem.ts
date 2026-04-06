@@ -1,0 +1,13 @@
+import type Tema from "./Tema";
+import type Usuario from "./Usuario";
+
+export default interface Postagem {
+    id: number;
+    titulo: string;
+    texto: string;
+    data: string;
+    tema?: Tema | null;
+    usuario?: Usuario | null;
+}
+ //caso nao tenha tema ou usuario, ele pode ser null
+//o react importa como tipo

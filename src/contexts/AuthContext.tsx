@@ -2,6 +2,7 @@ import { createContext, useState, type ReactNode } from "react"
 import type UsuarioLogin from "../models/UsuarioLogin"
 import { login } from "../services/Service"
 
+//
 interface AuthContextProps {
     usuario: UsuarioLogin
     handleLogout(): void
@@ -9,14 +10,17 @@ interface AuthContextProps {
     isLoading: boolean
 } //propriedades do contexto de autenticação
 
+//quem ira consumir o meu provedor:
 interface AuthProviderProps {
     children: ReactNode
 } //propriedades do provedor de autenticação
 
 //Criacao do contexto de autenticação
+//o meu contexto ira disponibilizar os estados e funcoes do tipo AuthCOntextProps
 export const AuthContext = createContext({} as AuthContextProps) //cria o contexto de autenticação
 
 //criacao do provedor
+//inicializa o estado usuario 
 export function AuthProvider({ children }: AuthProviderProps) {
     
     const [usuario, setUsuario] = useState<UsuarioLogin>({

@@ -1,6 +1,7 @@
 import { createContext, useState, type ReactNode } from "react"
 import type UsuarioLogin from "../models/UsuarioLogin"
 import { login } from "../services/Service"
+import { ToastAlerta } from "../utils/ToastAlerta"
 
 //
 interface AuthContextProps {
@@ -39,9 +40,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         setIsLoading(true) //ativa o Loader
         try{
             await login('/usuarios/logar', usuarioLogin, setUsuario) //chama a funcao de login do Service e atualiza o estado usuario com os dados do usuario autenticado
-            alert('Usuário autenticado com sucesso!')
+            ToastAlerta('Usuário autenticado com sucesso!', 'sucesso')
         }catch(error){
-            alert('Erro ao realizar login!')
+            ToastAlerta('Erro ao realizar login!', 'erro')
         }
         setIsLoading(false) //desativa o Loader
     }

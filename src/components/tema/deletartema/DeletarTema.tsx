@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { ClipLoader } from "react-spinners";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function DeletarTema() {
 
@@ -47,7 +48,7 @@ function DeletarTema() {
     //se ele for vazio, significa que o usuario nao esta logado, entao redireciona para a pagina de login
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado para acessar os temas!')
+            ToastAlerta('Você precisa estar logado para acessar os temas!', 'aviso')
             navigate('/login')
         }
     }, [token])
@@ -69,7 +70,7 @@ function DeletarTema() {
             await deletar(`/temas/${id}`, {
                 headers: { 'Authorization': token } //token é um obj, por isso fica na entre chaves
             })
-            alert('Tema deletado com sucesso!')
+            ToastAlerta('Tema deletado com sucesso!', 'sucesso')
 
         } catch (error: any) {
             if (error.toString().includes('401')) { //se o erro for 401, significa que o token é invalido ou expirou

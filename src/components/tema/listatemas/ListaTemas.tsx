@@ -5,6 +5,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { buscar } from "../../../services/Service";
 import { SyncLoader } from "react-spinners";
 import type Tema from "../../../models/Tema";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 
 function ListaTemas() {
@@ -27,7 +28,7 @@ function ListaTemas() {
     //se ele for vazio, significa que o usuario nao esta logado, entao redireciona para a pagina de login
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado para acessar os temas!')
+            ToastAlerta('Você precisa estar logado para acessar os temas!', 'aviso')
             navigate('/login')
         }
     }, [token])

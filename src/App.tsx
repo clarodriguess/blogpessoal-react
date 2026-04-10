@@ -8,13 +8,16 @@ import { AuthProvider } from "./contexts/AuthContext"
 import ListaTemas from "./components/tema/listatemas/ListaTemas"
 import FormTema from "./components/tema/formtema/FormTema"
 import DeletarTema from "./components/tema/deletartema/DeletarTema"
-
+import { ToastContainer } from "react-toastify/unstyled"
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
 
   return (
     <>
+
       <AuthProvider>
+        <ToastContainer />
         <BrowserRouter>
 
           <Navbar />

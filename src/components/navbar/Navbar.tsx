@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -9,7 +9,7 @@ function Navbar() {
 
     //consumo do contexto de autenticação - AuthContext
     //desestruturação para pegar a função de logout do contexto de autenticação, para poder deslogar o usuário quando ele clicar no botão de sair
-    const { handleLogout } = useContext(AuthContext)
+    const { handleLogout, usuario } = useContext(AuthContext)
 
     function logout() {
         handleLogout() //zera o estado usuario no contexto
@@ -17,9 +17,10 @@ function Navbar() {
         navigate("/") //pag de login
     }
 
-
-    return (
-        <>
+    //varialvel para renderizar o navbar somente quando o usuario estiver logado, ou seja, quando o token for diferente de vazio    
+    let component: ReactNode
+    if (usuario.token !== '') {
+        component = (
             <div className='w-full flex justify-center py-4
             			   bg-indigo-900 text-white'>
 
@@ -34,12 +35,19 @@ function Navbar() {
                         <Link to='/temas' className='hover:underline'>Temas</Link>
                         <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link>
                         Perfil
-                        <Link to="" onClick={logout} className="hover:underline"> 
-                            Sair
-                        </Link>  {/* funçao nao é rota, por isso o - to="" - ta vazio */}
+                        <Link to="" onClick={logout} className="hover:underline">Sair</Link>  {/* funçao nao é rota, por isso o - to="" - ta vazio */}
                     </div>
                 </div>
             </div>
+        )
+    } else {
+        component = null
+    }
+
+
+    return (
+        <>
+            {component}
         </>
     )
 }
